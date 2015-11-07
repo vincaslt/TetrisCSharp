@@ -1,0 +1,8 @@
+c:\users\vincas\documents\visual studio 2013\Projects\TetrisCS\TetrisCS\bin\Debug\TetrisCS.exe.config
+c:\users\vincas\documents\visual studio 2013\Projects\TetrisCS\TetrisCS\obj\Debug\TetrisCS.csprojResolveAssemblyReference.cache
+c:\users\vincas\documents\visual studio 2013\Projects\TetrisCS\TetrisCS\obj\Debug\TetrisCS.Properties.Resources.resources
+c:\users\vincas\documents\visual studio 2013\Projects\TetrisCS\TetrisCS\obj\Debug\TetrisCS.csproj.GenerateResource.Cache
+C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\bin\Debug\TetrisCS.exe
+C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\bin\Debug\TetrisCS.pdb
+C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\obj\Debug\TetrisCS.exe
+C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\obj\Debug\TetrisCS.pdb
