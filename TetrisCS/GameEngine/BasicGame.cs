@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TetrisCS.GameEngine
 {
@@ -10,17 +11,18 @@ namespace TetrisCS.GameEngine
 
     public abstract class BasicGame<TWindowIdType>
     {
-        protected Engine<TWindowIdType> engine;
+        protected Engine<TWindowIdType> Engine;
 
-        public BasicGame()
+        protected BasicGame()
         {
-            engine = new Engine<TWindowIdType>();
+            Engine = new Engine<TWindowIdType>();
         }
 
         public void Start(TWindowIdType entryWindowId, RegisterWindowsDelegate register)
         {
             register();
-            engine.InitializeWindows(entryWindowId);
+            Engine.InitializeWindows(entryWindowId);
+            Engine.Stop();
         }
     }
 }

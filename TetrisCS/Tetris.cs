@@ -9,17 +9,18 @@ namespace TetrisCS
 {
     public class Tetris : BasicGame<WindowId>
     {
-
         [STAThread]
         public static void Main()
         {
-            var G = new Tetris();
-            G.Start(WindowId.Game, new RegisterWindowsDelegate(G.RegisterWindows));
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            var game = new Tetris();
+            game.Start(WindowId.Game, game.RegisterWindows);
         }
 
         private void RegisterWindows()
         {
-            engine.RegisterWindow(new GameWindow());
+            Engine.RegisterWindow(new GameWindow(Engine));
         }
     }
 }

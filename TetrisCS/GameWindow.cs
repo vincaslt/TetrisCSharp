@@ -11,23 +11,23 @@ using TetrisCS.GameEngine;
 
 namespace TetrisCS
 {
-    partial class GameWindow : Window<WindowId>
+    internal partial class GameWindow : Window<WindowId>
     {
         public override WindowId Id => WindowId.Game;
 
-        public GameWindow()
+        public GameWindow(Engine<WindowId> engine) : base(engine)
         {
             InitializeComponent();
         }
 
-        public override void RenderState()
+        public override void RenderWindow(Graphics g)
         {
-            Console.WriteLine("Render");
+
         }
 
-        public override void UpdateState()
+        public override void UpdateWindow(int delta)
         {
-            Console.WriteLine("Update");
+
         }
     }
 }

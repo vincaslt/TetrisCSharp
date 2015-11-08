@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace TetrisCS.GameEngine
 {
@@ -11,25 +12,50 @@ namespace TetrisCS.GameEngine
 
     public abstract class Window<TWindowIdType> : Form
     {
+        private Panel _canvas;
+        private readonly Engine<TWindowIdType> _engine;
+
         public abstract TWindowIdType Id { get; }
 
-        public abstract void RenderState();
-
-        public abstract void UpdateState();
-
-        public virtual void InitializeState()
+        protected Window(Engine<TWindowIdType> engine)
         {
-            Console.WriteLine("Init");
+            _engine = engine;
+            InitializeComponent();
         }
 
-        public virtual void EnterState()
+        public abstract void RenderWindow(Graphics g);
+
+        public abstract void UpdateWindow(int delta);
+
+        public virtual void InitializeWindow() { }
+
+        private void _canvas_Paint(object sender, PaintEventArgs e)
         {
-            Console.WriteLine("Enter");
+            _engine.Start(_canvas.CreateGraphics());
         }
 
-        public virtual void LeaveState()
+        private void InitializeComponent()
         {
-            Console.WriteLine("Leave");
+            _canvas = new Panel();
+            SuspendLayout();
+
+            // 
+            // _canvas
+            // 
+            _canvas.Dock = DockStyle.Fill;
+            _canvas.Location = new Point(0, 0);
+            _canvas.Name = "_canvas";
+            _canvas.Size = new Size(800, 600);
+            _canvas.TabIndex = 0;
+            _canvas.Paint += _canvas_Paint;
+
+            // 
+            // Window
+            // 
+            ClientSize = new Size(800, 600);
+            Controls.Add(_canvas);
+            Name = "Window";
+            ResumeLayout(false);
         }
     }
 }
