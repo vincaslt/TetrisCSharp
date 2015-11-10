@@ -24,7 +24,7 @@ namespace TetrisCS
 
         private void GameWindow_InitializeWindow(object sender, EventArgs e)
         {
-            Console.WriteLine("Init");
+            Console.WriteLine("Init Game");
         }
 
 

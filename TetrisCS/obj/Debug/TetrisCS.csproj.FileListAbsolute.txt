@@ -7,3 +7,4 @@ C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\bin\Debu
 C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\obj\Debug\TetrisCS.exe
 C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\obj\Debug\TetrisCS.pdb
 C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\obj\Debug\TetrisCS.GameEngine.Window.resources
+C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\obj\Debug\TetrisCS.MenuWindow.resources

@@ -11,20 +11,20 @@ namespace TetrisCS.GameEngine
 
     public abstract class Window<TWindowIdType> : Form
     {
-        private Panel _canvas;
-        private readonly Engine<TWindowIdType> _engine;
+        protected Panel Canvas;
+        protected readonly Engine<TWindowIdType> Engine;
 
         public abstract TWindowIdType Id { get; }
 
         protected Window(Engine<TWindowIdType> engine)
         {
-            _engine = engine;
+            Engine = engine;
             InitializeComponent();
         }
 
         public void OnInitializeWindow(EventArgs e)
         {
-            EventHandler handler = InitializeWindow;
+            var handler = InitializeWindow;
             handler?.Invoke(this, e);
         }
 
@@ -34,31 +34,31 @@ namespace TetrisCS.GameEngine
 
         public event EventHandler InitializeWindow;
 
-        private void _canvas_Paint(object sender, PaintEventArgs e)
+        private void Canvas_Paint(object sender, PaintEventArgs e)
         {
-            _engine.Start(_canvas.CreateGraphics());
+            Engine.Start(Canvas.CreateGraphics());
         }
 
         private void InitializeComponent()
         {
-            _canvas = new Panel();
+            Canvas = new Panel();
             SuspendLayout();
 
             // 
-            // _canvas
+            // Canvas
             // 
-            _canvas.Dock = DockStyle.Fill;
-            _canvas.Location = new Point(0, 0);
-            _canvas.Name = "_canvas";
-            _canvas.Size = new Size(800, 600);
-            _canvas.TabIndex = 0;
-            _canvas.Paint += _canvas_Paint;
+            Canvas.Dock = DockStyle.Fill;
+            Canvas.Location = new Point(0, 0);
+            Canvas.Name = "Canvas";
+            Canvas.Size = new Size(800, 600);
+            Canvas.TabIndex = 0;
+            Canvas.Paint += Canvas_Paint;
 
             // 
             // Window
             // 
             ClientSize = new Size(800, 600);
-            Controls.Add(_canvas);
+            Controls.Add(Canvas);
             Name = "Window";
             ResumeLayout(false);
         }

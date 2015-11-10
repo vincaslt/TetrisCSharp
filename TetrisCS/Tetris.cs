@@ -15,12 +15,13 @@ namespace TetrisCS
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var game = new Tetris();
-            game.Start(WindowId.Game, game.RegisterWindows);
+            game.Start(WindowId.Menu, game.RegisterWindows);
         }
 
         private void RegisterWindows()
         {
             Engine.RegisterWindow(new GameWindow(Engine));
+            Engine.RegisterWindow(new MenuWindow(Engine));
         }
     }
 }

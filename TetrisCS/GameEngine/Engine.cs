@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,14 +16,14 @@ namespace TetrisCS.GameEngine
     {
         private Dictionary<TWindowIdType, Window<TWindowIdType>> _windows;
         private Window<TWindowIdType> _activeWindow;
-        private readonly Thread _renderThread;
-        private readonly Thread _updateThread;
+        private Thread _renderThread;
+        private Thread _updateThread;
+        private bool _isRunning;
 
         public Engine()
         {
             _windows = new Dictionary<TWindowIdType, Window<TWindowIdType>>();
-            _renderThread = new Thread(Render);
-            _updateThread = new Thread(Update);
+            InitThreads();
         }
 
         public void InitializeWindows(
@@ -33,6 +34,8 @@ namespace TetrisCS.GameEngine
             {
                 window.Value.OnInitializeWindow(new EventArgs());
             }
+
+            new Thread(ExitListener).Start();
 
             GoToWindow(entryWindow);
         }
@@ -50,7 +53,7 @@ namespace TetrisCS.GameEngine
             if (_activeWindow != null)
             {
                 Stop();
-                _activeWindow.Close();
+                _activeWindow.Hide();
                 initialize = false;
             }
 
@@ -66,14 +69,24 @@ namespace TetrisCS.GameEngine
 
         public void Stop()
         {
-            _renderThread.Abort();
-            _updateThread.Abort();
+            _isRunning = false;
+        }
+
+        private void InitThreads()
+        {
+            _renderThread = new Thread(Render);
+            _updateThread = new Thread(Update);
         }
 
         public void Start(Graphics g)
         {
-            _renderThread.Start(g);
-            _updateThread.Start();
+            if (!_isRunning && !_renderThread.IsAlive && !_updateThread.IsAlive)
+            {
+                InitThreads();
+                _renderThread.Start(g);
+                _updateThread.Start();
+            }
+            _isRunning = true;
         }
 
         private void Render(object g)
@@ -98,10 +111,16 @@ namespace TetrisCS.GameEngine
 
         private void ExecuteThread(ExecuteThreadDelegate executionBody)
         {
-            while (_activeWindow != null && _activeWindow.Visible)
+            while (_activeWindow != null && _activeWindow.Visible && _isRunning)
             {
                 executionBody();
             }
+        }
+
+        private void ExitListener()
+        {
+            while (!_isRunning || _windows.Values.Any(w => w.Visible)) { }
+            Application.Exit();
         }
     }
 }
