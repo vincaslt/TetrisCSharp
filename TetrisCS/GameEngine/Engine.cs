@@ -31,7 +31,7 @@ namespace TetrisCS.GameEngine
         {
             foreach (var window in _windows)
             {
-                window.Value.InitializeWindow();
+                window.Value.OnInitializeWindow(new EventArgs());
             }
 
             GoToWindow(entryWindow);

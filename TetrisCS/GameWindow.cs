@@ -18,7 +18,15 @@ namespace TetrisCS
         public GameWindow(Engine<WindowId> engine) : base(engine)
         {
             InitializeComponent();
+
+            InitializeWindow += GameWindow_InitializeWindow;
         }
+
+        private void GameWindow_InitializeWindow(object sender, EventArgs e)
+        {
+            Console.WriteLine("Init");
+        }
+
 
         public override void RenderWindow(Graphics g)
         {

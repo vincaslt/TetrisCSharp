@@ -8,7 +8,6 @@ using System.Drawing;
 
 namespace TetrisCS.GameEngine
 {
-    //GAUTI GRAPHICS
 
     public abstract class Window<TWindowIdType> : Form
     {
@@ -23,11 +22,17 @@ namespace TetrisCS.GameEngine
             InitializeComponent();
         }
 
+        public void OnInitializeWindow(EventArgs e)
+        {
+            EventHandler handler = InitializeWindow;
+            handler?.Invoke(this, e);
+        }
+
         public abstract void RenderWindow(Graphics g);
 
         public abstract void UpdateWindow(int delta);
 
-        public virtual void InitializeWindow() { }
+        public event EventHandler InitializeWindow;
 
         private void _canvas_Paint(object sender, PaintEventArgs e)
         {
