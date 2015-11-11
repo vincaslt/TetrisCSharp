@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TetrisCS.GameEngine;
+using TetrisCS.Windows;
 
 namespace TetrisCS
 {
@@ -22,6 +23,7 @@ namespace TetrisCS
         {
             Engine.RegisterWindow(new GameWindow(Engine));
             Engine.RegisterWindow(new MenuWindow(Engine));
+            Engine.RegisterWindow(new GameOverWindow(Engine));
         }
     }
 }

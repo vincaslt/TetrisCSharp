@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,19 +47,44 @@
   <ItemGroup>
     <Compile Include="GameEngine\BasicGame.cs" />
     <Compile Include="GameEngine\Engine.cs" />
+    <Compile Include="GameEngine\Utils\Point.cs" />
     <Compile Include="GameEngine\Window.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GameWindow.cs">
+    <Compile Include="GameObjects\Blocks\ActiveBlock.cs" />
+    <Compile Include="GameObjects\Blocks\Block.cs" />
+    <Compile Include="GameObjects\Blocks\SBlock.cs" />
+    <Compile Include="GameObjects\Blocks\ZBlock.cs" />
+    <Compile Include="GameObjects\Blocks\TBlock.cs" />
+    <Compile Include="GameObjects\Blocks\LBlock.cs" />
+    <Compile Include="GameObjects\Blocks\JBlock.cs" />
+    <Compile Include="GameObjects\Blocks\IBlock.cs" />
+    <Compile Include="GameObjects\Blocks\OBlock.cs" />
+    <Compile Include="GameObjects\Blocks\Square.cs" />
+    <Compile Include="GameObjects\GameField.cs" />
+    <Compile Include="Managers\GraphicsManager.cs" />
+    <Compile Include="Managers\InputManager.cs" />
+    <Compile Include="Managers\ScoreManager.cs" />
+    <Compile Include="Utils\BlockFactory.cs" />
+    <Compile Include="Utils\EnterWindowEventArgs.cs" />
+    <Compile Include="Utils\Timer.cs" />
+    <Compile Include="Windows\GameOverWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GameWindow.Designer.cs">
+    <Compile Include="Windows\GameOverWindow.Designer.cs">
+      <DependentUpon>GameOverWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\GameWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\GameWindow.Designer.cs">
       <DependentUpon>GameWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuWindow.cs">
+    <Compile Include="Managers\GameManager.cs" />
+    <Compile Include="Windows\MenuWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MenuWindow.Designer.cs">
+    <Compile Include="Windows\MenuWindow.Designer.cs">
       <DependentUpon>MenuWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Tetris.cs" />
@@ -66,9 +92,6 @@
     <Compile Include="WindowId.cs" />
     <EmbeddedResource Include="GameEngine\Window.resx">
       <DependentUpon>Window.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MenuWindow.resx">
-      <DependentUpon>MenuWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -93,7 +116,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Blocks\" />
+    <Content Include="assets\game_over.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\tetris.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

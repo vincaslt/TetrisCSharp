@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Configuration;
 
-namespace TetrisCS
+namespace TetrisCS.Windows
 {
     partial class MenuWindow
     {
@@ -26,6 +27,8 @@ namespace TetrisCS
 
         private void InitializeComponent()
         {
+            var w = int.Parse(ConfigurationManager.AppSettings["Width"]);
+            var h = int.Parse(ConfigurationManager.AppSettings["Height"]);
             this.buttonStart = new System.Windows.Forms.Button();
             this.SuspendLayout();
 
@@ -47,7 +50,7 @@ namespace TetrisCS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1024, 800);
+            this.ClientSize = new System.Drawing.Size(w, h);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MenuWindow";
             this.Text = "Tetris!";

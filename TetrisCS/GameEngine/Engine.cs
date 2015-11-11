@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Threading;
 
@@ -14,7 +15,7 @@ namespace TetrisCS.GameEngine
 
     public class Engine<TWindowIdType>
     {
-        private Dictionary<TWindowIdType, Window<TWindowIdType>> _windows;
+        private readonly Dictionary<TWindowIdType, Window<TWindowIdType>> _windows;
         private Window<TWindowIdType> _activeWindow;
         private Thread _renderThread;
         private Thread _updateThread;
@@ -47,6 +48,11 @@ namespace TetrisCS.GameEngine
 
         public void GoToWindow(TWindowIdType id)
         {
+            GoToWindow(id, new EventArgs(), new EventArgs());
+        }
+
+        public void GoToWindow(TWindowIdType id, EventArgs enterArgs, EventArgs leaveArgs)
+        {
             if (!_windows.ContainsKey(id)) return;
 
             var initialize = true;
@@ -54,10 +60,12 @@ namespace TetrisCS.GameEngine
             {
                 Stop();
                 _activeWindow.Hide();
+                _activeWindow.OnLeaveWindow(leaveArgs);
                 initialize = false;
             }
 
             _activeWindow = _windows[id];
+            _activeWindow.OnEnterWindow(enterArgs);
 
             if (initialize)
             {
@@ -91,10 +99,20 @@ namespace TetrisCS.GameEngine
 
         private void Render(object g)
         {
+            var frame = new Bitmap(1024, 800);
+            var frameGfx = Graphics.FromImage(frame);
+            
             ExecuteThread(delegate
             {
-                _activeWindow.RenderWindow((Graphics)g);
+                try
+                {
+                    _activeWindow.RenderWindow(frameGfx);
+                    ((Graphics)g).DrawImage(frame, 0, 0);
+                }
+                catch (ExternalException) { }
+
             });
+            
         }
 
         private void Update()

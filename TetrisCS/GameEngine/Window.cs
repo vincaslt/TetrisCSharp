@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,10 @@ namespace TetrisCS.GameEngine
 
     public abstract class Window<TWindowIdType> : Form
     {
+        public event EventHandler InitializeWindow;
+        public event EventHandler EnterWindow;
+        public event EventHandler LeaveWindow;
+
         protected Panel Canvas;
         protected readonly Engine<TWindowIdType> Engine;
 
@@ -24,43 +29,53 @@ namespace TetrisCS.GameEngine
 
         public void OnInitializeWindow(EventArgs e)
         {
-            var handler = InitializeWindow;
-            handler?.Invoke(this, e);
+            InitializeWindow?.Invoke(this, e);
+        }
+
+        public void OnEnterWindow(EventArgs e)
+        {
+            EnterWindow?.Invoke(this, e);
+        }
+
+        public void OnLeaveWindow(EventArgs e)
+        {
+            LeaveWindow?.Invoke(this, e);
         }
 
         public abstract void RenderWindow(Graphics g);
 
         public abstract void UpdateWindow(int delta);
 
-        public event EventHandler InitializeWindow;
-
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
+            //Console.WriteLine(e.Graphics);
             Engine.Start(Canvas.CreateGraphics());
         }
 
         private void InitializeComponent()
         {
-            Canvas = new Panel();
-            SuspendLayout();
-
+            var w = int.Parse(ConfigurationManager.AppSettings["Width"]);
+            var h = int.Parse(ConfigurationManager.AppSettings["Height"]);
+            this.Canvas = new System.Windows.Forms.Panel();
+            this.SuspendLayout();
             // 
             // Canvas
             // 
-            Canvas.Dock = DockStyle.Fill;
-            Canvas.Location = new Point(0, 0);
-            Canvas.Name = "Canvas";
-            Canvas.Size = new Size(800, 600);
-            Canvas.TabIndex = 0;
+            this.Canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Canvas.Location = new System.Drawing.Point(0, 0);
+            this.Canvas.Name = "Canvas";
+            this.Canvas.Size = new System.Drawing.Size(w, h);
             Canvas.Paint += Canvas_Paint;
+            this.Canvas.TabIndex = 0;
 
             // 
             // Window
             // 
-            ClientSize = new Size(800, 600);
-            Controls.Add(Canvas);
-            Name = "Window";
-            ResumeLayout(false);
+            this.ClientSize = new System.Drawing.Size(w, h);
+            this.Controls.Add(this.Canvas);
+            this.Name = "Window";
+            this.ResumeLayout(false);
+            DoubleBuffered = true;
         }
     }
 }

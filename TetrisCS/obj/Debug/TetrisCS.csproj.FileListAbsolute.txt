@@ -7,4 +7,5 @@ C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\bin\Debu
 C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\obj\Debug\TetrisCS.exe
 C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\obj\Debug\TetrisCS.pdb
 C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\obj\Debug\TetrisCS.GameEngine.Window.resources
-C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\obj\Debug\TetrisCS.MenuWindow.resources
+C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\bin\Debug\assets\game_over.png
+C:\Users\Vincas\Documents\Visual Studio 2013\Projects\TetrisCS\TetrisCS\bin\Debug\assets\tetris.jpg

@@ -1,6 +1,8 @@
-﻿namespace TetrisCS
+﻿using System.Configuration;
+
+namespace TetrisCS.Windows
 {
-    partial class GameWindow
+    partial class GameOverWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -24,12 +26,14 @@
 
         private void InitializeComponent()
         {
+            var w = int.Parse(ConfigurationManager.AppSettings["Width"]);
+            var h = int.Parse(ConfigurationManager.AppSettings["Height"]);
             components = new System.ComponentModel.Container();
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             Text = "Tetris!";
-            Name = "GameWindow";
-            Size = new System.Drawing.Size(1024, 800);
+            Name = "GameOverWindow";
+            Size = new System.Drawing.Size(w, h);
         }
 
         #endregion

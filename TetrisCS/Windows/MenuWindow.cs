@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TetrisCS.GameEngine;
 
-namespace TetrisCS
+namespace TetrisCS.Windows
 {
     internal partial class MenuWindow : Window<WindowId>
     {
@@ -17,14 +17,12 @@ namespace TetrisCS
 
         public MenuWindow(Engine<WindowId> engine) : base(engine)
         {
-            InitializeComponent();
-           
             InitializeWindow += MenuWindow_InitializeWindow;
         }
 
         private void MenuWindow_InitializeWindow(object sender, EventArgs e)
         {
-            Console.WriteLine("Init Menu");
+            InitializeComponent();
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
